@@ -1,0 +1,371 @@
+<?php
+/**
+ * @package        solo
+ * @copyright      2014-2016 Nicholas K. Dionysopoulos / Akeeba Ltd
+ * @license        GNU GPL version 3 or later
+ */
+
+use Awf\Text\Text;
+use Solo\Helper\Escape;
+
+/** @var $this \Solo\View\Configuration\Html */
+
+$router = $this->container->router;
+
+?>
+
+<?php
+// Configuration Wizard prompt
+if (!\Akeeba\Engine\Factory::getConfiguration()->get('akeeba.flag.confwiz', 0))
+{
+	echo $this->loadAnyTemplate('Configuration/confwiz_modal');
+}
+?>
+
+<div class="modal fade" id="ftpdialog" tabindex="-1" role="dialog" aria-labelledby="ftpdialogLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="ftpdialogLabel">
+					<?php echo Text ::_('COM_AKEEBA_CONFIG_UI_FTPBROWSER_TITLE') ?>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p class="instructions alert alert-info hidden-xs">
+					<button class="close" data-dismiss="alert">×</button>
+					<?php echo Text::_('COM_AKEEBA_FTPBROWSER_LBL_INSTRUCTIONS'); ?>
+				</p>
+				<div class="error alert alert-danger" id="ftpBrowserErrorContainer">
+					<button class="close" data-dismiss="alert">×</button>
+					<h2><?php echo Text::_('COM_AKEEBA_FTPBROWSER_LBL_ERROR'); ?></h2>
+
+					<p id="ftpBrowserError"></p>
+				</div>
+				<ol id="ak_crumbs" class="breadcrumb"></ol>
+				<div class="folderBrowserWrapper">
+					<table id="ftpBrowserFolderList" class="table table-striped">
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="ftpdialogCancelButton" class="btn btn-default" data-dismiss="modal">
+					<?php echo Text::_('SOLO_BTN_CANCEL') ?>
+				</button>
+				<button type="button" id="ftpdialogOkButton" class="btn btn-primary">
+					<?php echo Text::_('COM_AKEEBA_BROWSER_LBL_USE') ?>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="sftpdialog" tabindex="-1" role="dialog" aria-labelledby="sftpdialogLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="sftpdialogLabel">
+					<?php echo Text ::_('COM_AKEEBA_CONFIG_UI_SFTPBROWSER_TITLE') ?>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p class="instructions alert alert-info">
+					<button class="close" data-dismiss="alert">×</button>
+					<?php echo Text::_('COM_AKEEBA_SFTPBROWSER_LBL_INSTRUCTIONS'); ?>
+				</p>
+				<div class="error alert alert-danger" id="sftpBrowserErrorContainer">
+					<button class="close" data-dismiss="alert">×</button>
+					<h2><?php echo Text::_('COM_AKEEBA_SFTPBROWSER_LBL_ERROR'); ?></h2>
+
+					<p id="sftpBrowserError"></p>
+				</div>
+				<ol id="ak_scrumbs" class="breadcrumb"></ol>
+				<div class="folderBrowserWrapper">
+					<table id="sftpBrowserFolderList" class="table table-striped">
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="sftpdialogCancelButton" class="btn btn-default" data-dismiss="modal">
+					<?php echo Text::_('SOLO_BTN_CANCEL') ?>
+				</button>
+				<button type="button" id="sftpdialogOkButton" class="btn btn-primary">
+					<?php echo Text::_('COM_AKEEBA_BROWSER_LBL_USE') ?>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="dialogLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="dialogLabel">
+					<?php echo Text::_('COM_AKEEBA_CONFIG_UI_BROWSER_TITLE'); ?>
+				</h4>
+			</div>
+			<div class="modal-body" id="dialogBody">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="testFtpDialog" tabindex="-1" role="dialog" aria-labelledby="testFtpDialogLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="testFtpDialogLabel">
+				</h4>
+			</div>
+			<div class="modal-body" id="testFtpDialogBody">
+				<div class="alert alert-success" id="testFtpDialogBodyOk"></div>
+				<div class="alert alert-danger" id="testFtpDialogBodyFail"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<form name="adminForm" id="adminForm" method="post"
+	  action="<?php echo $router->route('index.php?view=configuration') ?>" class="form-horizontal">
+
+	<?php if (!AKEEBABACKUP_PRO && (rand(0, 9) == 0)): ?>
+		<div style="border: thick solid green; border-radius: 10pt; padding: 1em; background-color: #f0f0ff; color: #333; font-weight: bold; text-align: center; margin: 1em 0">
+			<p><?php echo Text::_('SOLO_MAIN_LBL_SUBSCRIBE_TEXT') ?></p>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="text-align: center; margin: 0px;">
+				<input type="hidden" name="cmd" value="_s-xclick" />
+				<input type="hidden" name="hosted_button_id" value="3NTKQ3M2DYPYW" />
+				<button onclick="this.form.submit(); return false;" class="btn btn-success">
+					<img src="https://www.paypal.com/en_GB/i/btn/btn_donate_LG.gif" border="0">
+					Donate via PayPal
+				</button>
+				<a class="small" style="font-weight: normal; color: #666" href="https://www.akeebabackup.com/subscribe/new/backupwp.html?layout=default">
+					<?php echo Text::_('SOLO_MAIN_BTN_SUBSCRIBE_UNOBTRUSIVE'); ?>
+				</a>
+			</form>
+		</div>
+	<?php endif; ?>
+
+	<div>
+		<?php if ($this->secureSettings): ?>
+			<div class="alert alert-success">
+				<button class="close" data-dismiss="alert">×</button>
+				<?php echo Text::_('COM_AKEEBA_CONFIG_UI_SETTINGS_SECURED'); ?>
+			</div>
+			<div class="ak_clr"></div>
+		<?php elseif ($this->secureSettings == 0): ?>
+			<div class="alert alert-danger">
+				<button class="close" data-dismiss="alert">×</button>
+				<?php echo Text::_('COM_AKEEBA_CONFIG_UI_SETTINGS_NOTSECURED'); ?>
+			</div>
+			<div class="ak_clr"></div>
+		<?php endif; ?>
+
+		<div class="alert alert-info">
+			<button class="close" data-dismiss="alert">×</button>
+			<strong><?php echo Text::_('COM_AKEEBA_CPANEL_PROFILE_TITLE'); ?></strong>:
+			#<?php echo $this->profileId; ?> <?php echo $this->profileName; ?>
+		</div>
+
+		<div class="alert alert-info">
+			<button class="close" data-dismiss="alert">×</button>
+			<?php echo Text::_('COM_AKEEBA_CONFIG_WHERE_ARE_THE_FILTERS'); ?>
+		</div>
+
+	</div>
+
+	<input type="hidden" name="task" value=""/>
+	<input type="hidden" name="token" value="<?php echo $this->container->session->getCsrfToken()->getValue() ?>"/>
+
+	<div class="well">
+		<h4>
+			<?php echo Text::_('COM_AKEEBA_PROFILES_LABEL_DESCRIPTION') ?>
+		</h4>
+		<div class="form-group">
+			<label class="control-label col-sm-3" for="profilename" rel="popover"
+				   data-original-title="<?php echo Text::_('COM_AKEEBA_PROFILES_LABEL_DESCRIPTION') ?>"
+				   data-content="<?php echo Text::_('COM_AKEEBA_PROFILES_LABEL_DESCRIPTION_TOOLTIP') ?>">
+				<?php echo Text::_('COM_AKEEBA_PROFILES_LABEL_DESCRIPTION') ?>
+			</label>
+			<div class="col-sm-9">
+				<input type="text" class="form-control" name="profilename" id="profilename" value="<?php echo $this->escape($this->profileName); ?>" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-3" for="quickicon" rel="popover"
+				   data-original-title="<?php echo Text::_('COM_AKEEBA_CONFIG_QUICKICON_LABEL') ?>"
+				   data-content="<?php echo Text::_('COM_AKEEBA_CONFIG_QUICKICON_DESC') ?>">
+				<?php echo Text::_('COM_AKEEBA_CONFIG_QUICKICON_LABEL') ?>
+			</label>
+			<div class="col-sm-9">
+				<input type="checkbox" name="quickicon" id="quickicon" <?php echo $this->quickicon ? 'checked="checked"' : ''; ?>/>
+			</div>
+		</div>
+	</div>
+
+	<!-- This div contains dynamically generated user interface elements -->
+	<div id="akeebagui">
+	</div>
+
+</form>
+<script type="text/javascript" language="javascript">
+// Callback routine to close the browser dialog
+var akeeba_browser_callback = null;
+
+Solo.loadScripts[Solo.loadScripts.length] = function () {
+	(function($){
+	// Initialise the translations
+	Solo.Configuration.translations['UI-BROWSE'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_UI_BROWSE')) ?>';
+	Solo.Configuration.translations['UI-CONFIG'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_UI_CONFIG')) ?>';
+	Solo.Configuration.translations['UI-REFRESH'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_UI_REFRESH')) ?>';
+	Solo.Configuration.translations['UI-FTPBROWSER-TITLE'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_UI_FTPBROWSER_TITLE')) ?>';
+	Solo.Configuration.translations['UI-ROOT'] = '<?php echo Escape::escapeJS(Text::_('SOLO_COMMON_LBL_ROOT')) ?>';
+	Solo.Configuration.translations['UI-TESTFTP-OK'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_DIRECTFTP_TEST_OK')) ?>';
+	Solo.Configuration.translations['UI-TESTFTP-FAIL'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_DIRECTFTP_TEST_FAIL')) ?>';
+	Solo.Configuration.translations['UI-TESTSFTP-OK'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_DIRECTSFTP_TEST_OK')) ?>';
+	Solo.Configuration.translations['UI-TESTSFTP-FAIL'] = '<?php echo Escape::escapeJS(Text::_('COM_AKEEBA_CONFIG_DIRECTSFTP_TEST_FAIL')) ?>';
+
+	// Push some custom URLs
+	Solo.Configuration.URLs['browser'] = '<?php echo Escape::escapeJS($router->route('index.php?view=browser&tmpl=component&processfolder=1&folder=')) ?>';
+	Solo.Configuration.URLs['ftpBrowser'] = '<?php echo Escape::escapeJS($router->route('index.php?view=ftpbrowser&tmpl=component')) ?>';
+	Solo.Configuration.URLs['sftpBrowser'] = '<?php echo Escape::escapeJS($router->route('index.php?view=sftpbrowser&tmpl=component')) ?>';
+	Solo.Configuration.URLs['testFtp'] = '<?php echo Escape::escapeJS($router->route('index.php?view=configuration&task=testftp&format=raw')) ?>';
+	Solo.Configuration.URLs['testSftp'] = '<?php echo Escape::escapeJS($router->route('index.php?view=configuration&task=testsftp&format=raw')) ?>';
+	Solo.Configuration.URLs['dpeauthopen'] = '<?php echo Escape::escapeJS($router->route('index.php?view=configuration&task=dpeoauthopen&format=raw')) ?>';
+	Solo.Configuration.URLs['dpecustomapi'] = '<?php echo Escape::escapeJS($router->route('index.php?view=configuration&task=dpecustomapi&format=raw')) ?>';
+	Solo.System.params.AjaxURL = Solo.Configuration.URLs['dpecustomapi'];
+
+	// Load the configuration UI data
+	akeeba_ui_theme_root = '<?php echo $this->mediadir ?>';
+	var data = JSON.parse("<?php echo $this->json; ?>");
+
+	// Work around Safari which ignores autocomplete=off. WTF!
+	setTimeout(function(){
+		Solo.Configuration.parseConfigData(data);
+
+		// Work around Chrome, Firefox etc "modern" browsers which blatantly ignore autocomplete=off
+		setTimeout('Solo.Configuration.restoreDefaultPasswords();', 1000);
+
+		// Enable tootip popovers
+		akeeba.jQuery('[rel="popover"]')
+			.popover({
+				trigger: 'manual',
+				animate: false,
+				html: true,
+				placement: 'bottom',
+				template: '<div class="popover akeeba-bootstrap-popover" onmouseover="akeeba.jQuery(this).mouseleave(function() {akeeba.jQuery(this).hide(); });"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+			})
+			.click(function(e) {
+				e.preventDefault();
+
+				var $this = akeeba.jQuery(this);
+
+				// Toggle the popup's "no close on mouse leave" state
+				if ($this.data('no-popup-close') == 1)
+				{
+					$this.data('no-popup-close', 0);
+
+					return;
+				}
+
+				$this.data('no-popup-close', 1);
+			})
+			.mouseenter(function(e) {
+				e.preventDefault();
+
+				akeeba.jQuery(this).popover('show');
+			})
+			.mouseleave(function(e) {
+				e.preventDefault();
+
+				var $this = akeeba.jQuery(this);
+
+				if ($this.data('no-popup-close') == 1)
+				{
+					return;
+				}
+
+				$this.popover('hide');
+			})
+		;
+
+		$(document.getElementById('var[akeeba.platform.dbdriver]')).change(function(){
+			if($(this).val() == 'sqlite')
+			{
+				$('input[id*="akeeba.platform.dbhost"]').val('').parents('.akeeba-ui-optionrow').hide();
+				$('input[id*="akeeba.platform.dbport"]').val('').parents('.akeeba-ui-optionrow').hide();
+				$('input[id*="akeeba.platform.dbusername"]').val('').parents('.akeeba-ui-optionrow').hide();
+				$('input[id*="akeeba.platform.dbpassword"]').val('').parents('.akeeba-ui-optionrow').hide();
+				$('input[id*="akeeba.platform.dbprefix"]').parents('.akeeba-ui-optionrow').hide();
+
+				$('input[id*="akeeba.platform.dbname"]').parents('.akeeba-ui-optionrow').show();
+			}
+			else if($(this).val() == 'none')
+            {
+                $('input[id*="akeeba.platform.dbhost"]').val('').parents('.akeeba-ui-optionrow').hide();
+                $('input[id*="akeeba.platform.dbport"]').val('').parents('.akeeba-ui-optionrow').hide();
+                $('input[id*="akeeba.platform.dbusername"]').val('').parents('.akeeba-ui-optionrow').hide();
+                $('input[id*="akeeba.platform.dbpassword"]').val('').parents('.akeeba-ui-optionrow').hide();
+                $('input[id*="akeeba.platform.dbprefix"]').parents('.akeeba-ui-optionrow').hide();
+                $('input[id*="akeeba.platform.dbname"]').val('').parents('.akeeba-ui-optionrow').hide();
+            }
+			else
+			{
+				$('input[id*="akeeba.platform.dbhost"]').parents('.akeeba-ui-optionrow').show();
+				$('input[id*="akeeba.platform.dbport"]').parents('.akeeba-ui-optionrow').show();
+				$('input[id*="akeeba.platform.dbusername"]').parents('.akeeba-ui-optionrow').show();
+				$('input[id*="akeeba.platform.dbpassword"]').parents('.akeeba-ui-optionrow').show();
+				$('input[id*="akeeba.platform.dbprefix"]').parents('.akeeba-ui-optionrow').show();
+				$('input[id*="akeeba.platform.dbname"]').parents('.akeeba-ui-optionrow').show();
+			}
+		})
+			.change();
+
+	}, 10);
+
+	// Initialise hooks used by the definition INI files
+	akeeba_directftp_init_browser = function()
+	{
+		Solo.Configuration.FtpBrowser.initialise('engine.archiver.directftp.initial_directory', 'engine.archiver.directftp')
+	}
+
+	akeeba_postprocftp_init_browser = function()
+	{
+		Solo.Configuration.FtpBrowser.initialise('engine.postproc.ftp.initial_directory', 'engine.postproc.ftp')
+	}
+
+	akeeba_directsftp_init_browser = function()
+	{
+		Solo.Configuration.SftpBrowser.initialise('engine.archiver.directsftp.initial_directory', 'engine.archiver.directsftp')
+	}
+
+	akeeba_postprocsftp_init_browser = function()
+	{
+		Solo.Configuration.SftpBrowser.initialise('engine.postproc.sftp.initial_directory', 'engine.postproc.sftp')
+	}
+
+	directftp_test_connection = function()
+	{
+		Solo.Configuration.FtpTest.testConnection('engine.archiver.directftp.ftp_test','engine.archiver.directftp');
+	}
+
+	postprocftp_test_connection = function()
+	{
+		Solo.Configuration.FtpTest.testConnection('engine.postproc.ftp.ftp_test','engine.postproc.ftp');
+	}
+
+	directsftp_test_connection = function()
+	{
+		Solo.Configuration.SftpTest.testConnection('engine.archiver.directsftp.sftp_test','engine.archiver.directsftp');
+	}
+
+	postprocsftp_test_connection = function()
+	{
+		Solo.Configuration.SftpTest.testConnection('engine.postproc.sftp.sftp_test','engine.postproc.sftp');
+	}
+	}(akeeba.jQuery));
+};
+</script>

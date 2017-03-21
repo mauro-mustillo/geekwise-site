@@ -1,0 +1,13 @@
+[Fri, 27 Jan 2017 03:07:50 +0000] [/wp-admin/admin.php?page=w3tc_general&w3tc_message=588ab9860adef] [http://v3.geekwiseacademy.com/wp-admin/admin.php?page=w3tc_general&w3tc_message=588ab54f7d974] skip processing because of generic constant
+[Fri, 27 Jan 2017 03:07:52 +0000] [/wp-cron.php?doing_wp_cron=1485486471.2417819499969482421875] [http://v3.geekwiseacademy.com/wp-cron.php?doing_wp_cron=1485486471.2417819499969482421875] skip processing because of generic constant
+[Fri, 27 Jan 2017 03:07:53 +0000] [/w3tc_rewrite_test784315722] [http://v3.geekwiseacademy.com/w3tc_rewrite_test784315722] start, can_cache: false
+[Fri, 27 Jan 2017 03:08:18 +0000] [/wp-admin/plugins.php] [http://v3.geekwiseacademy.com/wp-admin/admin.php?page=w3tc_general&w3tc_message=588ab9860adef] skip processing because of generic constant
+[Fri, 27 Jan 2017 03:08:20 +0000] [/w3tc_rewrite_test1091417802] [http://v3.geekwiseacademy.com/w3tc_rewrite_test1091417802] start, can_cache: false
+[Fri, 27 Jan 2017 03:08:26 +0000] [/wp-admin/plugins.php?action=deactivate&plugin=w3-total-cache%2Fw3-total-cache.php&plugin_status=all&paged=1&s&_wpnonce=af486829fb] [http://v3.geekwiseacademy.com/wp-admin/plugins.php] skip processing because of generic constant
+[Fri, 27 Jan 2017 17:26:53 +0000] [/w3tc_rewrite_test125065395] [http://v3.geekwiseacademy.com/w3tc_rewrite_test125065395] start, can_cache: false
+[Fri, 27 Jan 2017 17:27:03 +0000] [/] [-] start, can_cache: true
+[Fri, 27 Jan 2017 17:27:03 +0000] [/] [-] no cache entry for v3.geekwiseacademy.com/_index.html
+[Fri, 27 Jan 2017 17:27:08 +0000] [/] [-] storing cached page: true original  true reason 
+[Fri, 27 Jan 2017 17:27:17 +0000] [/] [-] start, can_cache: true
+[Fri, 27 Jan 2017 17:27:55 +0000] [/wp-admin/admin-ajax.php] [http://v3.geekwiseacademy.com/wp-admin/plugins.php?charsout=861&plugin=w3-total-cache%2Fw3-total-cache.php&plugin_status=all&paged=1&s] skip processing because of generic constant
+[Fri, 27 Jan 2017 17:27:57 +0000] [/wp-admin/plugins.php?action=deactivate&plugin=w3-total-cache%2Fw3-total-cache.php&plugin_status=all&paged=1&s&_wpnonce=f7856fa62f] [http://v3.geekwiseacademy.com/wp-admin/plugins.php?charsout=861&plugin=w3-total-cache%2Fw3-total-cache.php&plugin_status=all&paged=1&s] skip processing because of generic constant

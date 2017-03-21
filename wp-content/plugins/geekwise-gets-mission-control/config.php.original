@@ -1,0 +1,169 @@
+<?php
+
+/*
+ * General
+ */
+$mail_bcc_from_email = 'irma.olguin.jr@gmail.com';
+$mail_bcc_from_name = 'Irma L. Olguin Jr.';
+
+
+
+
+/*
+ * Database
+ */
+if( !defined('MISSION_CONTROL_DB_NAME') )
+    define('MISSION_CONTROL_DB_NAME', 'db50925_geekwiseacademy');
+
+if( !defined('MISSION_CONTROL_DB_USER') )
+    define('MISSION_CONTROL_DB_USER', 'db50925');
+
+if( !defined('MISSION_CONTROL_DB_PASSWORD') )
+    define('MISSION_CONTROL_DB_PASSWORD', ';Z4gMqey0*');
+
+if( !defined('MISSION_CONTROL_DB_HOST') )
+    define('MISSION_CONTROL_DB_HOST', 'external-db.s50925.gridserver.com');
+
+
+
+/*
+ * Stripe
+*/
+require_once('stripe/Stripe.php');
+
+
+//$stripe = array(
+//    "secret_key"      => "sk_live_lS87WKKDbF4NYWRcfN4qWgOI",
+//    "publishable_key" => "pk_live_2RILCuoSrpu5DuOuloukGpeh"
+//);
+
+
+
+/*
+** Test Keys
+*/
+$stripe = array(
+  "secret_key"      => "sk_test_A8BIoiTfQbl71YUYNvRaRt6X",
+  "publishable_key" => "pk_test_bgrSAB1K9P16FUWdWUXbnAwh"
+);
+
+
+
+Stripe::setApiKey($stripe['secret_key']);
+
+
+
+
+/*
+ * Postmark
+ */
+if( !defined('POSTMARKAPP_API_KEY') )
+    define('POSTMARKAPP_API_KEY', '2d732b2a-1983-4039-94e1-abbd5c06d77c');
+
+if( !defined('POSTMARKAPP_MAIL_FROM_ADDRESS') )
+    define('POSTMARKAPP_MAIL_FROM_ADDRESS', 'tsolis@geekwiseacademy.com');
+
+if( !defined('POSTMARKAPP_MAIL_FROM_NAME') )
+    define('POSTMARKAPP_MAIL_FROM_NAME', 'Terry from Geekwise');
+
+require_once( 'Postmark/Postmark.php' );
+
+
+
+/*
+ * Mailchimp
+ */
+if( !defined('MAILCHIMP_APIKEY') )
+    define('MAILCHIMP_APIKEY', '7e2207ebdd3a9cc098b729385ba77bd6-us7');
+
+require_once( 'mailchimp/Mailchimp.php' );
+
+
+
+
+/*
+ * DRIP
+ */
+if( ! defined( 'DRIP_ACCOUNT_ID' ) ) {
+    define( 'DRIP_ACCOUNT_ID', '2009655');
+}
+
+
+if( ! defined( 'DRIP_API_TOKEN' ) ) {
+    define( 'DRIP_API_TOKEN', 'egsvkov86dgzkgexmmpq');
+}
+
+
+if( ! defined( 'DRIP_CAMPAIGN_ID' ) ) {
+    define( 'DRIP_CAMPAIGN_ID', '2170595' );
+}
+
+    
+if( !defined('DRIP_REPEAT_CAMPAIGN_ID') ) {
+    define( 'DRIP_REPEAT_CAMPAIGN_ID', '2103717' );
+}
+
+require_once('GetDrip/get-drip-api-wrapper.php');
+
+
+
+/*
+ * GEEKWISE
+ */
+
+if( !defined('GEEKWISE_SUMMER_CAMP_ROUND') ) {
+    define( 'GEEKWISE_SUMMER_CAMP_ROUND', '2016' );
+}
+// some stuff to use
+if (! defined( 'GEEKWISE_API_BASE_URL' ) ) {
+
+    define( 'GEEKWISE_API_BASE_URL', ' https://missioncontrol.bitwiseindustries.com/api/v1/geekwise/' );
+
+}
+
+
+
+
+// make a simple list of rounds
+// this list should get replaced
+// my logic from mission control
+$rounds = array (
+
+    '01/11/2016' => 20,
+    '02/22/2016' => 21,
+    '04/04/2016' => 22,
+    '05/16/2016' => 23,
+    '06/27/2016' => 24,
+    '08/08/2016' => 25,
+    '09/19/2016' => 26,
+    '01/09/2017' => 27,
+    '02/20/2017' => 28,
+    '04/03/2017' => 29,
+    '06/26/2017' => 30,
+    '08/07/2017' => 31,
+    '09/18/2017' => 32
+
+);
+
+// some stuff to use
+if (! defined( 'GEEKWISE_ROUNDS' ) ) {
+
+    define( 'GEEKWISE_ROUNDS', serialize( $rounds ) );
+
+}  
+
+if( !defined( 'GEEKWISE_ROUND_OF_CLASSES' ) ) {
+
+    $round = geekwise_get_round_as_of( 'today' );
+
+    define( 'GEEKWISE_ROUND_OF_CLASSES', $round );
+
+} 
+
+
+
+
+
+
+
+?>

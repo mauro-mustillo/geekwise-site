@@ -1,0 +1,17 @@
+/**
+ * Hide Singular title - CSS Fallback.
+ * Please modify this file if needed to suite your needs.
+ * Post ID (post-id-goes-here) is automatically replaced with an ID of current singular post.
+ * This file is loaded only when CSS Fallback is enabled and the specific singular post is requested.
+ */
+h1.entry-title {
+	display: none;
+}
+
+h1.article-title {
+	display: none;
+}
+
+h1#post-post-id-goes-here {
+	display: none;
+}
