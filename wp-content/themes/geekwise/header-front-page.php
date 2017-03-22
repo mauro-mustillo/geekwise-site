@@ -48,14 +48,19 @@
     <div class="site-header-main row">
         <div class="site-branding col-sm-12 col-xs-12">
 
+
         	<div class="row">
-                <div class="col-sm-6 col-xs-6">
+                <div class="col-sm-6 col-xs-4 col-md-2 logo">
                     <?php twentysixteen_the_custom_logo(); ?>
                 </div>
+                 <div class="col-sm-8 col-xs-8 col-md-10 ">
                 
-                <div class="col-sm-6 col-xs-6 link-signup-for-class">
-                    <?php dynamic_sidebar('header-top-right'); ?>
-                </div>            
+                <div class="link-signup-for-class">
+                   <?php dynamic_sidebar('header-top-right'); ?>
+                </div> 
+                  <div id="main-nav" >
+          <?php dynamic_sidebar( 'main-menu' ); ?>
+</div>           
             </div>
             
             <?php if ( is_front_page() && is_home() ) : ?>
@@ -70,44 +75,7 @@
             <?php endif; ?>
         </div><!-- .site-branding -->
 		
-        <div class="col-sm-12 col-xs-12">
-        <?php if ( has_nav_menu( 'primary' ) || has_nav_menu( 'social' ) ) : ?>
-        	
-            
-            <div class="site-header-menu">
-	            <?php ubermenu( 'main' , array( 'theme_location' => 'primary' ) ); ?>
-            </div>
-            
-            <?php /*?><button id="menu-toggle" class="menu-toggle"><?php _e( 'Menu', 'twentysixteen' ); ?></button>
-
-            <div id="site-header-menu" class="site-header-menu">
-                <?php if ( has_nav_menu( 'primary' ) ) : ?>
-                    <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'twentysixteen' ); ?>">
-                        <?php
-                            wp_nav_menu( array(
-                                'theme_location' => 'primary',
-                                'menu_class'     => 'primary-menu',
-                             ) );
-                        ?>
-                    </nav><!-- .main-navigation -->
-                <?php endif; ?>
-
-                <?php if ( has_nav_menu( 'social' ) ) : ?>
-                    <nav id="social-navigation" class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'twentysixteen' ); ?>">
-                        <?php
-                            wp_nav_menu( array(
-                                'theme_location' => 'social',
-                                'menu_class'     => 'social-links-menu',
-                                'depth'          => 1,
-                                'link_before'    => '<span class="screen-reader-text">',
-                                'link_after'     => '</span>',
-                            ) );
-                        ?>
-                    </nav><!-- .social-navigation -->
-                <?php endif; ?>
-            </div><!-- .site-header-menu --><?php */?>
-        <?php endif; ?>
-        </div>
+        
     </div><!-- .site-header-main -->
 
     <?php if ( get_header_image() ) : ?>
