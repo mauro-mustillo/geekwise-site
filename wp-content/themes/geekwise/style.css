@@ -1206,7 +1206,7 @@ input.wpcf7-form-control.wpcf7-submit:hover {
 .site-header-wrapper {
 	top: 0px;
 	position: fixed;
-	height: 200px!important;
+	height: 80px!important;
 	-webkit-transition: height .3s; /* Safari */
 	transition: height .3s;
 }
@@ -1219,10 +1219,10 @@ home .scroll .site-header-wrapper {
 	height: 80vh!important;
 }
 .scroll .site-header-wrapper {
-	height: 170px!important;
+	height: 80px!important;
 }
 #content {
-	padding-top: 240px;
+	padding-top: 120px;
 }
 #content H1 {
 	text-align: center;
@@ -1264,17 +1264,17 @@ ul.mainul > li {
 
 
 .site-branding {
-	margin: 0.875em auto 0.875em 0;
+	margin: 0.45em auto 0.875em 0;
 	/* Avoid overflowing wide custom logo in small screens in Firefox and IEs */
 	max-width: 100%;
 	min-width: 0;
-	overflow: hidden;
+	
 }
 .custom-logo-link {
 	display: block;
 }
 .custom-logo {
-	max-width: 180px;
+	max-width: 100%;
 }
 .site-title {
 	/*font-family: Montserrat, "Helvetica Neue", sans-serif;*/
@@ -2107,11 +2107,11 @@ body:not(.custom-background-image):after {
 /*padding: 3.9375em 7.6923%;*/
 }
 .site-branding {
-	margin-top: 1.3125em;
-	margin-bottom: 1.3125em;
+	margin-top: .5em;
+	margin-bottom: .5em;
 }
 .custom-logo {
-	max-width: 210px;
+	max-width: 150px;
 }
 .site-title {
 	font-size: 28px;
@@ -2549,7 +2549,7 @@ body:not(.custom-background-image).admin-bar:before {
 		margin-bottom: 1.75em;*/
 }
 .custom-logo {
-	max-width: 240px;
+	max-width: 170px;
 }
 .image-navigation {
 	margin-bottom: 3.230769231em;

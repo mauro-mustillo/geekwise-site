@@ -281,6 +281,17 @@ function twentysixteen_widgets_init() {
 		'before_title'  => '<h2 class="widget-title"><span>',
 		'after_title'   => '</span></h2>',
 	) );	
+	
+	
+	register_sidebar( array(
+		'name'          => __( 'Main Menu', 'twentysixteen' ),
+		'id'            => 'main-menu',
+		'description'   => __( 'Main Menu', 'twentysixteen' ),
+		'before_widget' => '',
+		'after_widget'  => '',
+		'before_title'  => '',
+		'after_title'   => '',
+	) );	
 }
 add_action( 'widgets_init', 'twentysixteen_widgets_init' );
 

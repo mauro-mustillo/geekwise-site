@@ -27,30 +27,33 @@ body.blog .contewelcoment-area .entry-header{display:block}
     z-index: 999999!important
 }
 .change {width:100%; float:left; background:#271f1c url(../images/bg-main-header.jpg) no-repeat 50% 70%;   }	
-.site-branding{padding-top:15px; padding-bottom:15px}
+.site-branding{padding-top:10px; padding-bottom:10px}
 .custom-logo-link{text-align:center; margin-bottom:15px}
 .site-branding aside{display:block; float:left; width:100%; text-align:center}
-.link-signup-for-class a{color:#fff; font-weight:700; text-transform:uppercase; background:tranparent;
-border:4px solid #fcda0c; -webkit-border-radius:10px; -moz-border-radius:10px; -ms-border-radius:10px; -o-border-radius:10px; border-radius:10px; display:inline-block; padding:7px 10px; line-height:normal; text-decoration:none}
+
+#main-nav {float: right}
+.link-signup-for-class {position: fixed; right: 120px; top: 10px}
+.link-signup-for-class a{color:#fff; font-weight:700; text-transform:uppercase; background:tranparent; font-size: 16px;margin-top: 12px!important;
+border:2px solid #fcda0c; -webkit-border-radius:10px; -moz-border-radius:10px; -ms-border-radius:10px; -o-border-radius:10px; border-radius:10px; display:inline-block; padding:7px ; line-height:normal; text-decoration:none}
 .link-signup-for-class a:hover{background:#fcda0c}
 .site-header-wrapper{width:100%; float:left; background:#271f1c url(../images/bg-main-header.jpg) no-repeat 50% 70%; margin-bottom:50px}
 body.home .site-header-wrapper{margin-bottom:0}
 body.home .site-header-wrapper{background-position:50% 100%; background-size:cover}
 .site-header-menu{margin-bottom:30px}
 .site-header-wrapper {
-	 z-index:9999999; top: 0px; height: 200px
+	 z-index:9999999; top: 0px; height: 80px
 	
 } 
 @media only screen and  (max-width: 1199px)  {
 .site-header-wrapper {
 	top: 0px; z-index:9999999;
 	position: fixed;
-	height: 170px!important;
+	height: 80px!important;
 	-webkit-transition: height .3s; /* Safari */
 	transition: height .3s;
 } 
 .scroll .site-header-wrapper {
-	height: 170px!important;
+	height: 80px!important;
 }
 .site-footer h2.widget-title  {font-size: 28px!important}
 .block-contact ul li {font-size:18px!important; min-height: 50px!important}
@@ -435,7 +438,6 @@ body{font-size:18px}
 .custom-logo-link{text-align:left; margin-bottom:0}
 .site-branding aside{display:inline-block; float:right}
 .site-header .entry-title{font-size:45px; margin:0 0 60px}
-.link-signup-for-class a{float:right; margin-top:17px}	
 .site-header-menu{margin-bottom:60px}
 .home-hero-section{/*padding-bottom:235px*/ padding-bottom:175px}
 .home-hero-section h1{font-size:75px; padding-bottom:100px; margin:0 0 70px}
@@ -525,7 +527,6 @@ body{font-size:18px}
 
 #header-home-bg, .site-header-wrapper-home  {position: fixed; top:0px}
 .ubermenu-skin-grey-white.ubermenu-responsive-toggle {margin-top: -10px!important}
-.link-signup-for-class a {margin-top:17px!important}
 .ubermenu-skin-grey-white.ubermenu-responsive-toggle {margin-top: 5px!important}
 
 }
@@ -537,7 +538,7 @@ body{font-size:18px}
 .current-courses-row.clearfix > div.col-sm-2 > strong {margin-top: 20px!important; display: block; margin-bottom: -20px}
 .link-signup-for-class a {margin-top:0px}
 .ubermenu-skin-grey-white.ubermenu-responsive-toggle {margin-top: -10px!important}
-.scroll .site-header-wrapper, .site-header-wrapper {  height: 155px!important;}
+.scroll .site-header-wrapper, .site-header-wrapper {  height: 80px!important;}
 .post-29 div.container > div.col-sm-5 p {
 	line-height: 160%!important;
 	font-size: 16px
@@ -656,3 +657,80 @@ and (orientation : portrait) { .current-courses-header, .course-title-sm, div.co
 
 @media only screen and (min-width: 1200px) {
 .class-details li {display:inline-block; width:48%; margin: 2px; background-color: #f7f7f7; text-align: center!important; font-size: 18px; padding: 10px; color:#636363}}
+
+
+/*------------------------------------*\
+    NAV
+\*------------------------------------*/
+#menu-mainmenu {
+    list-style: none; margin-top: 10px;
+    font-weight: bold; float: right;
+    margin-bottom: 10px; 
+    /* Clear floats */
+    width: 100%; z-index: 999999!important;
+ 
+    position: relative;
+  
+}
+#menu-mainmenu li {
+    float: left; 
+    
+    position: relative;
+}
+#menu-mainmenu a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+ font-size: 17px; font-weight: 600!important;
+    text-decoration: none;
+}
+#menu-mainmenu a:hover {
+    color: #fff;
+    background-color: #b21c14;
+    text-decoration: none;
+}
+
+/*--- DROPDOWN ---*/
+#menu-mainmenu ul {
+    background-color: #fff; /* Adding a background makes the dropdown work properly in IE7+. Make this as close to your page's background as possible (i.e. white page == white background). */
+    background: rgba(255,255,255,0); /* But! Let's make the background fully transparent where we can, we don't actually want to see it if we can help it... */
+    list-style: none;
+    position: absolute;
+    left: -9999px; /* Hide off-screen when not needed (this is more accessible than display: none;) */
+}
+#menu-mainmenu ul li {
+    padding-top: 0px; /* Introducing a padding between the li and the a give the illusion spaced items */
+    float: none;
+}
+
+
+#menu-mainmenu ul a {
+    white-space: nowrap; /* Stop text wrapping and creating multi-line dropdown items */
+}
+#menu-mainmenu li:hover ul { /* Display the dropdown on hover */
+    left: 0; /* Bring back on-screen when needed */; margin-left: 0px
+}
+#menu-mainmenu li:hover a { /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
+    background-color: #b21c14;
+    text-decoration: none;
+}
+#menu-mainmenu li:hover ul a { /* The persistent hover state does however create a global style for links even before they're hovered. Here we undo these effects. */
+    text-decoration: none;  padding: 7px 10px;
+}
+#menu-mainmenu li:hover ul li a:hover { /* Here we define the most explicit hover states--what happens when you hover each individual link. */
+    background-color: #333;
+}
+#menu-mainmenu li:hover ul li a {
+   font-weight: 300!important; font-size: 12px!important
+}
+button#responsive-menu-button, #responsive-menu-container,.nav  {z-index: 9999999!important; }
+
+
+
+
+@media only screen and (min-width: 1200px) {
+.link-signup-for-class {float: right; margin-right: 0px; right: 0px; position: relative; top: 0px}}
+
+
+
+
