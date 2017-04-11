@@ -26,26 +26,24 @@
        <div class="home-instructors-back"> 
         <div class="container">
         <section class="home-instructors col-sm-12">
-        	<h1>Not Your Average Instructors</h1>            
-			<?php
-				echo do_shortcode('[ess_grid alias="mentors"]'); 
-			/*$query = new WP_Query( array('post_type' => 'mentors-cpt', 'orderby' => 'rand', 'posts_per_page' => 8) );	
+        	<h2>SOCIAL NETWORKS</h2>
+        	<BR/><BR/>
+        	<div class="row">
 			
-			if ( $query->have_posts() ) :
-				// Start the loop.			
-				?>
-				<ul>
-				<?php
-				while ( $query->have_posts() ) : $query->the_post();
-				?>
-				<li class="col-xs-6 col-sm-3"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php twentysixteen_post_thumbnail(); ?></a></li>
-				<?php
-				// End of the loop.		
-				endwhile;
-			else:  
-			?>
-			<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-			<?php endif; */ ?>
+       	<div class="col-md-6">
+       	<div class="fb-page" data-href="https://www.facebook.com/GeekwiseAcademy/" data-tabs="timeline" data-width="600" data-height="500" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"  style="margin-left: 50px"><blockquote cite="https://www.facebook.com/GeekwiseAcademy/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/GeekwiseAcademy/">Geekwise Academy</a></blockquote></div>
+       	</div>
+       		<div class="col-md-6"><a class="twitter-timeline" data-width="500" data-height="500" href="https://twitter.com/GeekwiseAcademy">Tweets by GeekwiseAcademy</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+       	</div>
+        	
+        		</div>
+        	
+        	
+        	
+        	
+        	
+        	
+        	
         </section>
         </div></div>
 

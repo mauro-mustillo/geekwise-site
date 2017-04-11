@@ -1001,3 +1001,27 @@ function custom_breadcrumbs() {
     }
        
 }
+
+
+function getCourseById($id=false) {
+	if (empty($id) || $id === false) {
+		return false;
+	}
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, 'http://mission-control-production.us-west-1.elasticbeanstalk.com/1.0.0/geekwise/course/'.$id);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+	$return = curl_exec($ch);
+	return json_decode($return);
+}
+
+
+function getCourses() {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://mission-control-production.us-west-1.elasticbeanstalk.com/1.0.0/geekwise/courses/upcoming');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        $return = curl_exec($ch);
+        return json_decode($return);
+		
+}

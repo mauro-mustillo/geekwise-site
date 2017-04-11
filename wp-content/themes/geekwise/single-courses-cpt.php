@@ -10,11 +10,31 @@
 get_header(); ?>
 
 <div class="container-fluid no-side-padding">
+
+
+<?php
+$courseId = '58ebe32a70a4020678ccb9b4';
+$course = getCourseById($courseId);
+
+if ($course === false) {
+	//Invalid Course. Do something.
+} else {
+	//Valid course. Show it!
+}
+$courseName = $course->name;
+$courseCost = $course->cost;
+$courseStart = $course->start_date;
+$courseEnd = $course->end_date;
+$maxEnrollment = $course->max_enrollment;
+$courseDays = $course->days;	//Array
+	?>
+	
+
 <div class="container">
 <h1 class="entry-title"><?php single_post_title(); ?></h1>	
 <div id="primary" class="content-area post-detail col-sm-10 col-sm-push-1">
 	<main id="main" class="site-main" role="main">
-	
+
 		<?php
 		// Start the loop.
 		while ( have_posts() ) : the_post();

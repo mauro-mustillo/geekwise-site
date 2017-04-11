@@ -7,7 +7,22 @@
  * @since Twenty Sixteen 1.0
  */
 ?>
+<?php
+$courseId = '58ebe32a70a4020678ccb9b4';
+$course = getCourseById($courseId);
 
+if ($course === false) {
+	//Invalid Course. Do something.
+} else {
+	//Valid course. Show it!
+}
+$courseName = $course->name;
+$courseCost = $course->cost;
+$courseStart = $course->start_date;
+$courseEnd = $course->end_date;
+$maxEnrollment = $course->max_enrollment;
+$courseDays = $course->days;	//Array
+	?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <!-- .entry-header -->
 
@@ -29,7 +44,11 @@
 </div>
 <div class="row class-details">
 <ul>
- 	<li>Course Cost<strong><?php the_field('course_cost'); ?></strong></li>
+ 	<li>Course Cost<strong><?php /*?><?php the_field('course_cost'); ?>
+ 	
+ 				<br/><?php */?>$<?php echo $courseCost;?>
+
+ 	</strong></li>
  	<li>Length <strong><?php the_field('course_length'); ?></strong></li>
 </ul>
 </div>
